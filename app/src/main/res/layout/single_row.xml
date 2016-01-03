@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp"
+    android:paddingTop="50dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hollow_star"
+        android:id="@+id/imageView3"
+        android:padding="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="TestNote"
+        android:id="@+id/noteTextView"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="30dp"
+        android:paddingTop="8.5dp"
+        android:textSize="22sp" />
+
+</LinearLayout>
