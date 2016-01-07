@@ -39,24 +39,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             notesDB.execSQL("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT, noteText VARCHAR, " +
                     "star INTEGER DEFAULT 0,timestamp DATE DEFAULT (datetime('now','localtime')));");
 
-            Cursor c = notesDB.rawQuery("SELECT id,noteText,star from notes ORDER BY timestamp DESC",null);
+            Cursor c = notesDB.rawQuery("SELECT id,noteText,star from notes ORDER BY timestamp DESC", null);
 
             int noteIdIndex = c.getColumnIndex("id");
             int noteIndex = c.getColumnIndex("noteText");
             int starIndex = c.getColumnIndex("star");
 
-            c.moveToFirst();
-
-
-            while(c!=null){
-                Log.i("dabo","noteId ->" + Integer.toString(c.getInt(noteIdIndex)));
-                Log.i("dabo","note ->" + c.getString(noteIndex));
-                Log.i("dabo","star ->" + Integer.toString(c.getInt(starIndex)));
-                data.add(c.getString(noteIndex));
-                c.moveToNext();
+            if(c.getCount() != 0 && c!=null){
+                c.moveToFirst();
+                do{
+                    Log.i("dabo","noteId ->" + Integer.toString(c.getInt(noteIdIndex)));
+                    Log.i("dabo","note ->" + c.getString(noteIndex));
+                    Log.i("dabo","star ->" + Integer.toString(c.getInt(starIndex)));
+                    data.add(c.getString(noteIndex));
+                }while(c.moveToNext());
             }
-
-
         }catch(Exception ex){
             ex.printStackTrace();
         }
