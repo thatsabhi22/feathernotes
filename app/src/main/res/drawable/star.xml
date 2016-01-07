@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+        android:drawable="@drawable/solid_red_star" /> <!-- pressed -->
+    <item android:state_focused="true"
+        android:drawable="@drawable/solid_red_star" /> <!-- focused -->
+    <item android:state_hovered="true"
+        android:drawable="@drawable/solid_red_star" /> <!-- hovered -->
+    <item android:drawable="@drawable/hollow_star_30_30" /> <!-- default -->
+</selector>
