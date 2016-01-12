@@ -23,9 +23,20 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     //static String[] data = {"Jan","Feb","Maraaaaa aaaaa aaaaa aaaa aaaaa aaaaa aaaaa aaaaa aaa aaaaaa","April","May","June","July","Aug","Sept","Oct"};
+
     static ArrayList<String> data ;
+    static ArrayList<Integer> noteIdList;
+    static ArrayList<Integer> starList;
+    static ArrayAdapter<String> arrayAdapter;
+
     ListView listView;
     static SQLiteDatabase notesDB;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d("MainActivity","On Resume Called");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setSupportActionBar(toolbar);
         try {
             data = new ArrayList<>();
+            noteIdList = new ArrayList<>();
+            starList = new ArrayList<>();
+
             notesDB = this.openOrCreateDatabase("featherNotesDB", MODE_PRIVATE, null);
             notesDB.execSQL("CREATE TABLE IF NOT EXISTS notes (id INTEGER PRIMARY KEY AUTOINCREMENT, noteText VARCHAR, " +
                     "star INTEGER DEFAULT 0,timestamp DATE DEFAULT (datetime('now','localtime')));");
@@ -49,8 +63,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 c.moveToFirst();
                 do{
                     Log.i("dabo","noteId ->" + Integer.toString(c.getInt(noteIdIndex)));
-                    Log.i("dabo","note ->" + c.getString(noteIndex));
+                    noteIdList.add(c.getInt(noteIdIndex));
+                    Log.i("dabo", "note ->" + c.getString(noteIndex));
                     Log.i("dabo","star ->" + Integer.toString(c.getInt(starIndex)));
+                    starList.add(c.getInt(starIndex));
                     data.add(c.getString(noteIndex));
                 }while(c.moveToNext());
             }
@@ -68,8 +84,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
+        reloadListView();
+    }
+
+    public void reloadListView() {
         listView = (ListView) findViewById(R.id.listView);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
+        arrayAdapter = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(this);
         arrayAdapter.setNotifyOnChange(true);
@@ -78,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void callEditNote(int position){
         Intent intent = new Intent(this,EditNotes.class);
         intent.putExtra("noteId", position);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     public void onToggleStar(View view){
@@ -92,6 +114,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Log.d("onItemClick",">>>>>>" + id);
         callEditNote(position);
     }
 }
