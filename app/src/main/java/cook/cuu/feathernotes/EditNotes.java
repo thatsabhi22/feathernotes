@@ -58,7 +58,7 @@ public class EditNotes extends AppCompatActivity {
     private void decideEditInsert(){
         if(position == -1 && !inserted)
             insertNote();
-        else if(!TextUtils.equals(current,editText.getText()) && !edited)
+        else if(!TextUtils.equals(current,editText.getText()) && !edited && !inserted)
             editNote();
     }
 
@@ -135,6 +135,7 @@ public class EditNotes extends AppCompatActivity {
     }
 
     private void editNote() {
+
         try {
             if (TextUtils.isEmpty(editText.getText())) {
                 Toast.makeText(this, "No Text Typed", Toast.LENGTH_LONG).show();
@@ -151,6 +152,7 @@ public class EditNotes extends AppCompatActivity {
                 edited = true;
                 Toast.makeText(this, "Note Edited ..", Toast.LENGTH_SHORT).show();
                 Log.i("Life","Note Edited ..");
+
             }
         }catch(Exception e){
             e.printStackTrace();

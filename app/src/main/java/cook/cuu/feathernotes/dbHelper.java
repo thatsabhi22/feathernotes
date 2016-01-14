@@ -3,6 +3,9 @@ package cook.cuu.feathernotes;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
+import android.widget.Toast;
 
 /**
  * Created by aviator on 07/01/16.
@@ -30,5 +33,16 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
+    }
+
+    public void deleteNote(int id){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteStatement stmt = db.compileStatement("DELETE FROM notes where id = ?;");
+        stmt.bindString(1, String.valueOf(id));
+        stmt.execute();
+        //MainActivity.arrayAdapter.notifyDataSetChanged();
+
+        Log.i("Life","Note Deleted ..");
     }
 }
