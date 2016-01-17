@@ -3,6 +3,7 @@ package cook.cuu.feathernotes;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -35,8 +36,7 @@ public class Auth extends AppCompatActivity {
             if(checkIfFirstTime()){
                 Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
                 displayTextView.setText("Create Passcode");
-
-
+                displayTextView.setTextColor(Color.rgb(0,128,0));
                 firstTimeFlag = true;
             }
             else{

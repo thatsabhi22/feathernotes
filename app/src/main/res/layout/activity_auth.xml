@@ -17,31 +17,22 @@
         android:ems="10"
         android:gravity="center"
         android:id="@+id/passCode"
-        android:layout_marginTop="20dp"
         android:maxLines="1"
         android:maxLength="4"
-        android:layout_below="@+id/medium_logo"
-        android:layout_centerHorizontal="true" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/enter"
-        android:src="@drawable/enter"
-        android:onClick="authenticate"
-        android:layout_below="@+id/passCode"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp" />
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/displayText"
+        android:layout_alignStart="@+id/displayText"
+        android:layout_alignRight="@+id/displayText"
+        android:layout_alignEnd="@+id/displayText" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/medium_logo"
         android:src="@drawable/logo_medium"
-        android:layout_marginTop="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/enter"
-        android:layout_alignStart="@+id/enter" />
+        android:layout_above="@+id/displayText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -57,9 +48,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text=""
+        android:text="freedsfdsfsdfsd"
         android:id="@+id/displayText"
-        android:layout_below="@+id/medium_logo"
+        android:layout_above="@+id/passCode"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enter"
+        android:src="@drawable/enter"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/passCode"
+        android:layout_toEndOf="@+id/passCode" />
 
 </RelativeLayout>
