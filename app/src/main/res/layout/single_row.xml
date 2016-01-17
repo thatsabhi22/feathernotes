@@ -15,9 +15,7 @@
         android:background="#00ffffff"
         android:onClick="onToggleStar" />
 
-    <!--android:focusable="false"-->
-
-    <TextView
+    <cook.cuu.feathernotes.MyCustomTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -25,8 +23,10 @@
         android:id="@+id/noteTextView"
         android:layout_gravity="center_horizontal"
         android:singleLine="true"
-        android:ellipsize="end"
+        android:ellipsize="middle"
+        android:textScaleX="1.0"
         android:paddingLeft="20dp"
-        android:textSize="22sp" />
-    <!--android:paddingTop="8.5dp"-->
+        android:textSize="20sp"
+        android:paddingTop="2dp" />
+
 </LinearLayout>

@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Feather Notes"
-        android:id="@+id/textView2"
+        android:id="@+id/appTitle"
         android:layout_marginTop="69dp"
         android:textColor="#eb6d6d"
         android:textSize="40sp"

@@ -14,8 +14,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
             </intent-filter>
         </activity>
         <activity
@@ -23,14 +21,18 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".EditNotes">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="cook.cuu.feathernotes.MainActivity" />
+                android:value="cook.cuu.feathernotes.MainActivity"
+                android:windowSoftInputMode="stateAlwaysVisible" />
+        </activity>
+        <activity android:name=".Auth"
+            android:theme="@style/AppTheme.NoActionBar">
+            <category android:name="android.intent.category.HOME" />
         </activity>
     </application>
 

@@ -1,5 +1,6 @@
 package cook.cuu.feathernotes;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -9,10 +10,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditNotes extends AppCompatActivity {
+
 
     EditText editText;
     DbHelper dbHelper;
@@ -24,12 +27,21 @@ public class EditNotes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_edit_notes);
 
         Intent intent   =   getIntent();
         position        =   intent.getIntExtra("noteId", -1);
-
         editText        =   (EditText) findViewById(R.id.editText);
+        editText.setTypeface(SplashScreen.typeface);
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                InputMethodManager keyboard = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                keyboard.showSoftInput(editText, 0);
+            }
+        },200);
 
         if(position!= -1) {
             editText.setText(MainActivity.data.get(position));

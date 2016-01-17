@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -28,8 +29,9 @@ public class DialogClass extends DialogFragment implements View.OnClickListener{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         bundle      =   getArguments();
-        View view   =   inflater.inflate(R.layout.dialoglayout,null);
+        View view   =   inflater.inflate(R.layout.dialog_layout,null);
         yes         =   (Button) view.findViewById(R.id.yes);
         no          =   (Button) view.findViewById(R.id.no);
         yes.setOnClickListener(this);

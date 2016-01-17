@@ -7,10 +7,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="You are deleting this note ?"
+        android:text="Delete Note ?"
         android:id="@+id/deleteQuery"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="20dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -18,9 +20,9 @@
         android:layout_height="wrap_content"
         android:text="Yes"
         android:id="@+id/yes"
-        android:layout_below="@+id/imageView"
-        android:layout_alignRight="@+id/deleteQuery"
-        android:layout_alignEnd="@+id/deleteQuery" />
+        android:layout_below="@+id/deleteQuery"
+        android:layout_toRightOf="@+id/deleteQuery"
+        android:layout_toEndOf="@+id/deleteQuery" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -29,17 +31,9 @@
         android:text="No"
         android:id="@+id/no"
         android:layout_alignTop="@+id/yes"
-        android:layout_toLeftOf="@+id/yes"
-        android:layout_toStartOf="@+id/yes" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/icon_small"
-        android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/deleteQuery"
-        android:layout_toStartOf="@+id/deleteQuery"
-        android:paddingRight="10dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="120dp" />
 
 </RelativeLayout>
