@@ -3,19 +3,13 @@ package cook.cuu.feathernotes;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -23,7 +17,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener,DialogClass.Communicator {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener,SimpleDialogClass.Communicator {
 
     //static String[] data = {"Jan","Feb","Maraaaaa aaaaa aaaaa aaaa aaaaa aaaaa aaaaa aaaaa aaa aaaaaa","April","May","June","July","Aug","Sept","Oct"};
 
@@ -132,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("Long Press","onItemLongClick Called");
         FragmentManager fragmentManager  = getFragmentManager();
-        DialogClass dc = new DialogClass();
+        SimpleDialogClass dc = new SimpleDialogClass();
         Bundle bb = new Bundle();
         bb.putInt("position",position);
         dc.setArguments(bb);

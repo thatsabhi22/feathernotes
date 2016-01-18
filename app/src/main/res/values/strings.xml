@@ -3,4 +3,19 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_edit_notes">EditNotes</string>
+
+    <string-array name="hintQuestionsArray">
+        <item>Who was your childhood hero?</item>
+        <item>Who was your favorite teacher in School?</item>
+        <item>What was your childhood nickname?</item>
+        <item>What was the first company I have worked for?</item>
+        <item>What was the first book I have read?</item>
+        <item>In what city did you meet your spouse/significant other?</item>
+        <item>What is the name of your favorite childhood friend?</item>
+        <item>In what city or town was your first job?</item>
+        <item>In which city did I got married?</item>
+        <item>Where were you when you had your first kiss?</item>
+        <item>What is your School Name?</item>
+    </string-array>
+
 </resources>

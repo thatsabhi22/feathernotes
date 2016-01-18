@@ -13,7 +13,7 @@ import android.widget.Toast;
 /**
  * Created by aviator on 29/11/15.
  */
-public class DialogClass extends DialogFragment implements View.OnClickListener{
+public class SimpleDialogClass extends DialogFragment implements View.OnClickListener{
 
     Bundle bundle;
     Button yes,no;

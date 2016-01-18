@@ -1,24 +1,31 @@
 package cook.cuu.feathernotes;
 
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Auth extends AppCompatActivity {
 
-    EditText passCodeBox;
+    EditText passCodeBox,hintAnswer;
+    static EditText hintQuestion;
     TextView displayTextView;
+    DbHelper dbHelper;
     boolean firstTimeFlag = false;
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,21 +34,33 @@ public class Auth extends AppCompatActivity {
             setContentView(R.layout.activity_auth);
 
             passCodeBox     =   (EditText) findViewById(R.id.passCode);
+            hintQuestion    =   (EditText) findViewById(R.id.hintQuestion);
+            hintAnswer      =   (EditText) findViewById(R.id.hintAnswer);
             displayTextView =   (TextView) findViewById(R.id.displayText);
+            imageButton     =   (ImageButton) findViewById(R.id.suggest);
             displayTextView.setTypeface(SplashScreen.typeface);
 
+            hintQuestion.setTypeface(SplashScreen.typeface);
+            hintAnswer.setTypeface(SplashScreen.typeface);
+
             MainActivity.notesDB = this.openOrCreateDatabase("featherNotesDB", MODE_PRIVATE, null);
-            MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER);");
+            MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER, hintQuestion VARCHAR,hintAnswer VARCHAR);");
 
             if(checkIfFirstTime()){
                 Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
                 displayTextView.setText("Create Passcode");
                 displayTextView.setTextColor(Color.rgb(0,128,0));
+
                 firstTimeFlag = true;
             }
             else{
                 Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
                 displayTextView.setText("Enter Passcode");
+                hintQuestion.setVisibility(View.GONE);
+                hintAnswer.setVisibility(View.GONE);
+                imageButton.setVisibility(View.GONE);
+                passCodeBox.setNextFocusDownId(R.id.hintQuestion);
+                hintQuestion.setNextFocusDownId(R.id.hintAnswer);
             }
         }catch (Exception ex){
             ex.printStackTrace();
@@ -74,15 +93,59 @@ public class Auth extends AppCompatActivity {
     }
 
     public void authenticate(View view){
-
         if(firstTimeFlag){
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+            // For first time entry to app
+            if(passCodeBox.length() == 4){
+                if(!TextUtils.isEmpty(hintQuestion.getText())){
+                    if(!TextUtils.isEmpty(hintAnswer.getText())){
+                        savePassCode(String.valueOf(passCodeBox.getText()), String.valueOf(hintQuestion.getText()),String.valueOf(hintAnswer.getText()));
+                        Intent intent = new Intent(this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        displayTextView.setTextColor(Color.RED);
+                        displayTextView.setText("Please Enter Your Security Answer");
+                    }
+                }
+                else{
+                    displayTextView.setTextColor(Color.RED);
+                    displayTextView.setText("Please Enter Your Security Question or Click on suggest.");
+                }
+            }
+            else{
+                displayTextView.setTextColor(Color.RED);
+                displayTextView.setText("Please Enter 4 Digit Passcode.");
+            }
         }
         else{
+            //For entry as a returning user to the app
 
         }
+    }
 
+    public void displayHintQuestionDialog(View view){
+            FragmentManager fragmentManager  = getFragmentManager();
+            ListDialogClass ldc = new ListDialogClass();
+            ldc.show(fragmentManager, "Dio");
+    }
+
+    private void savePassCode(String passCode, String hintQuestion, String hintAnswer) {
+
+        try{
+
+            dbHelper = new DbHelper(this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            SQLiteStatement stmt = db.compileStatement("INSERT INTO users (passCode,hintQuestion,hintAnswer) values (?,?,?);");
+            stmt.bindString(1, passCode);
+            stmt.bindString(2, hintQuestion);
+            stmt.bindString(3, hintAnswer);
+            stmt.execute();
+
+        }catch(Exception ex){
+
+            ex.printStackTrace();
+
+        }
 
     }
 }
