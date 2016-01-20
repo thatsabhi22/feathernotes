@@ -41,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/passCodeHelp"
+        android:onClick="openPassCodeHelpDialog"
         android:src="@drawable/key_small"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="true"
@@ -70,10 +71,10 @@
         android:gravity="center_horizontal"
         android:layout_marginLeft="25dp"
         android:textSize="15sp"
-        android:textColorHint="#fbf1b3f1"
         android:maxLines="2"
         android:paddingLeft="30dp"
-        android:paddingRight="30dp" />
+        android:paddingRight="30dp"
+        android:textColorHint="@color/colorPrimary" />
 
     <EditText
         android:layout_width="match_parent"
@@ -89,7 +90,7 @@
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:textSize="15sp"
-        android:textColorHint="#fbf1b3f1"
+        android:textColorHint="@color/colorPrimary"
         android:maxLines="1" />
 
     <ImageView

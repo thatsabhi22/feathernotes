@@ -11,7 +11,7 @@ import android.widget.Toast;
 /**
  * Created by aviator on 18/01/16.
  */
-public class ListDialogClass extends DialogFragment {
+public class SecQListDialog extends DialogFragment {
     String[] questionsArray;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {

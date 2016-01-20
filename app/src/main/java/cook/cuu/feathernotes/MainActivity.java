@@ -19,8 +19,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener,SimpleDialogClass.Communicator {
 
-    //static String[] data = {"Jan","Feb","Maraaaaa aaaaa aaaaa aaaa aaaaa aaaaa aaaaa aaaaa aaa aaaaaa","April","May","June","July","Aug","Sept","Oct"};
-
     static ArrayList<String> data ;
     static ArrayList<Integer> noteIdList;
     static ArrayList<Integer> starList;
@@ -32,6 +30,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onResume() {
         super.onResume();
         Log.d("MainActivity", "On Resume Called");
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this,Auth.class);
+        startActivity(intent);
     }
 
     @Override

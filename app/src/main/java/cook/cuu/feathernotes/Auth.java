@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -39,6 +38,7 @@ public class Auth extends AppCompatActivity {
             displayTextView =   (TextView) findViewById(R.id.displayText);
             imageButton     =   (ImageButton) findViewById(R.id.suggest);
             displayTextView.setTypeface(SplashScreen.typeface);
+            displayTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
 
             hintQuestion.setTypeface(SplashScreen.typeface);
             hintAnswer.setTypeface(SplashScreen.typeface);
@@ -49,8 +49,8 @@ public class Auth extends AppCompatActivity {
             if(checkIfFirstTime()){
                 Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
                 displayTextView.setText("Create Passcode");
-                displayTextView.setTextColor(Color.rgb(0,128,0));
-
+                passCodeBox.setNextFocusDownId(R.id.hintQuestion);
+                hintQuestion.setNextFocusDownId(R.id.hintAnswer);
                 firstTimeFlag = true;
             }
             else{
@@ -59,8 +59,6 @@ public class Auth extends AppCompatActivity {
                 hintQuestion.setVisibility(View.GONE);
                 hintAnswer.setVisibility(View.GONE);
                 imageButton.setVisibility(View.GONE);
-                passCodeBox.setNextFocusDownId(R.id.hintQuestion);
-                hintQuestion.setNextFocusDownId(R.id.hintAnswer);
             }
         }catch (Exception ex){
             ex.printStackTrace();
@@ -76,6 +74,16 @@ public class Auth extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public boolean checkValidUser(String passCode) {
+        Cursor c = MainActivity.notesDB.rawQuery("SELECT id,passCode from users where passCode = ?;", new String[]{passCode});
+        int count = c.getCount();
+        c.close();
+        if (count > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -118,15 +126,37 @@ public class Auth extends AppCompatActivity {
             }
         }
         else{
-            //For entry as a returning user to the app
-
+            if(passCodeBox.length() == 4){
+                if(checkValidUser(String.valueOf(passCodeBox.getText()))){
+                    Toast.makeText(this,"Entry Valid",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(this,MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                }
+                else{
+                    passCodeBox.setText("");
+                    displayTextView.setTextColor(Color.RED);
+                    displayTextView.setText("Please Enter Valid Passcode.");
+                }
+                //For entry as a returning user to the app
+            }
+            else{
+                displayTextView.setTextColor(Color.RED);
+                displayTextView.setText("Please Enter 4 Digit Passcode.");
+            }
         }
     }
 
     public void displayHintQuestionDialog(View view){
-            FragmentManager fragmentManager  = getFragmentManager();
-            ListDialogClass ldc = new ListDialogClass();
-            ldc.show(fragmentManager, "Dio");
+        FragmentManager fragmentManager  = getFragmentManager();
+        SecQListDialog ldc = new SecQListDialog();
+        ldc.show(fragmentManager, "securityQuestionDialog");
+    }
+
+    public void openPassCodeHelpDialog(View view){
+        FragmentManager fragmentManager  = getFragmentManager();
+        PassCodeActionListDialog passCodeActionListDialog = new PassCodeActionListDialog();
+        passCodeActionListDialog.show(fragmentManager, "passCodeHelpDialog");
     }
 
     private void savePassCode(String passCode, String hintQuestion, String hintAnswer) {
@@ -142,10 +172,7 @@ public class Auth extends AppCompatActivity {
             stmt.execute();
 
         }catch(Exception ex){
-
             ex.printStackTrace();
-
         }
-
     }
 }
