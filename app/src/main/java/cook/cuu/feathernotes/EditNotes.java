@@ -156,7 +156,7 @@ public class EditNotes extends AppCompatActivity {
 
                 dbHelper = new DbHelper(this);
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
-                SQLiteStatement stmt = db.compileStatement("UPDATE notes set noteText = ?, timestamp =  datetime('now','localtime') where id = ?;");
+                SQLiteStatement stmt = db.compileStatement("UPDATE notes SET noteText = ?, timestamp =  datetime('now','localtime') where id = ?;");
                 stmt.bindString(1, String.valueOf(editText.getText()));
                 stmt.bindString(2, String.valueOf(MainActivity.noteIdList.get(position)));
                 stmt.execute();

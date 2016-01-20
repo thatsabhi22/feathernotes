@@ -28,44 +28,60 @@ public class Auth extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_auth);
         try{
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_auth);
-
             passCodeBox     =   (EditText) findViewById(R.id.passCode);
             hintQuestion    =   (EditText) findViewById(R.id.hintQuestion);
             hintAnswer      =   (EditText) findViewById(R.id.hintAnswer);
             displayTextView =   (TextView) findViewById(R.id.displayText);
             imageButton     =   (ImageButton) findViewById(R.id.suggest);
-            displayTextView.setTypeface(SplashScreen.typeface);
-            displayTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
 
-            hintQuestion.setTypeface(SplashScreen.typeface);
-            hintAnswer.setTypeface(SplashScreen.typeface);
+            Intent intent   = getIntent();
+            String code     = intent.getStringExtra("Msg");
 
-            MainActivity.notesDB = this.openOrCreateDatabase("featherNotesDB", MODE_PRIVATE, null);
-            MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER, hintQuestion VARCHAR,hintAnswer VARCHAR);");
+            if(TextUtils.isEmpty(code)){
 
-            if(checkIfFirstTime()){
-                Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
-                displayTextView.setText("Create Passcode");
-                passCodeBox.setNextFocusDownId(R.id.hintQuestion);
-                hintQuestion.setNextFocusDownId(R.id.hintAnswer);
-                firstTimeFlag = true;
-            }
-            else{
-                Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
-                displayTextView.setText("Enter Passcode");
-                hintQuestion.setVisibility(View.GONE);
-                hintAnswer.setVisibility(View.GONE);
-                imageButton.setVisibility(View.GONE);
+                displayTextView.setTypeface(SplashScreen.typeface);
+                displayTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
+
+                hintQuestion.setTypeface(SplashScreen.typeface);
+                hintAnswer.setTypeface(SplashScreen.typeface);
+
+                MainActivity.notesDB = this.openOrCreateDatabase("featherNotesDB", MODE_PRIVATE, null);
+                MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER, hintQuestion VARCHAR,hintAnswer VARCHAR);");
+
+                if(checkIfFirstTime()){
+                    Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
+                    displayTextView.setText("Create Passcode");
+                    passCodeBox.setNextFocusDownId(R.id.hintQuestion);
+                    hintQuestion.setNextFocusDownId(R.id.hintAnswer);
+                    firstTimeFlag = true;
+                }
+                else{
+                    Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
+                    returningUserVisibility();
+                }
+            }else{
+                Bundle bundle = new Bundle();
+                bundle.putString("Msg", code);
+                FragmentManager fm = getFragmentManager();
+                MessageDialog messageDialog = new MessageDialog();
+                messageDialog.setArguments(bundle);
+                messageDialog.show(fm, "messageDialog");
+                returningUserVisibility();
             }
         }catch (Exception ex){
             ex.printStackTrace();
         }
-
     }
 
+    public void returningUserVisibility(){
+        displayTextView.setText("Enter Passcode");
+        hintQuestion.setVisibility(View.GONE);
+        hintAnswer.setVisibility(View.GONE);
+        imageButton.setVisibility(View.GONE);
+    }
     public boolean checkIfFirstTime(){
         Cursor c    =   MainActivity.notesDB.rawQuery("SELECT id,passCode from users;", null);
         int count   =   c.getCount();
@@ -89,15 +105,19 @@ public class Auth extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        passCodeBox.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodManager keyboard = (InputMethodManager)
-                        getSystemService(Context.INPUT_METHOD_SERVICE);
-                keyboard.showSoftInput(passCodeBox, 0);
-            }
-        }, 200);
+        try {
+            passCodeBox.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    InputMethodManager keyboard = (InputMethodManager)
+                            getSystemService(Context.INPUT_METHOD_SERVICE);
+                    keyboard.showSoftInput(passCodeBox, 0);
+                }
+            }, 200);
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
+        }
     }
 
     public void authenticate(View view){
