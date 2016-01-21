@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -119,6 +121,10 @@ public class EditNotes extends AppCompatActivity {
                 switchToHome();
                 //Toast.makeText(getApplicationContext(),"Back button clicked", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.saveNote:
+                decideEditInsert();
+                switchToHome();
+                break;
         }
         return true;
     }
@@ -169,5 +175,12 @@ public class EditNotes extends AppCompatActivity {
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_edit_notes, menu);
+        return true;
     }
 }

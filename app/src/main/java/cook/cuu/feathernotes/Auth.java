@@ -52,14 +52,14 @@ public class Auth extends AppCompatActivity {
                 MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER, hintQuestion VARCHAR,hintAnswer VARCHAR);");
 
                 if(checkIfFirstTime()){
-                    Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
-                    displayTextView.setText("Create Passcode");
+//                    Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
+                    displayTextView.setText("You're First time using this app. Create Your own Passcode");
                     passCodeBox.setNextFocusDownId(R.id.hintQuestion);
                     hintQuestion.setNextFocusDownId(R.id.hintAnswer);
                     firstTimeFlag = true;
                 }
                 else{
-                    Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
                     returningUserVisibility();
                 }
             }else{
@@ -127,7 +127,9 @@ public class Auth extends AppCompatActivity {
                 if(!TextUtils.isEmpty(hintQuestion.getText())){
                     if(!TextUtils.isEmpty(hintAnswer.getText())){
                         savePassCode(String.valueOf(passCodeBox.getText()), String.valueOf(hintQuestion.getText()),String.valueOf(hintAnswer.getText()));
+                        Toast.makeText(this,"Your Passcode has been created.",Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(this,MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
                     else{
@@ -148,7 +150,7 @@ public class Auth extends AppCompatActivity {
         else{
             if(passCodeBox.length() == 4){
                 if(checkValidUser(String.valueOf(passCodeBox.getText()))){
-                    Toast.makeText(this,"Entry Valid",Toast.LENGTH_LONG).show();
+//                    Toast.makeText(this,"Entry Valid",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(this,MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);

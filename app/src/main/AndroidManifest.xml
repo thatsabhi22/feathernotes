@@ -36,7 +36,10 @@
             android:theme="@style/AppTheme.NoActionBar">
             <category android:name="android.intent.category.HOME" />
         </activity>
-        <activity android:name=".PassCode"></activity>
+        <activity android:name=".PassCode"
+            android:theme="@style/AppTheme.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

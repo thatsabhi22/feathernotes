@@ -17,34 +17,6 @@
     tools:context="cook.cuu.feathernotes.Auth"
     android:background="#ffffff">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberPassword"
-        android:ems="10"
-        android:gravity="center"
-        android:id="@+id/passCode"
-        android:maxLines="1"
-        android:maxLength="4"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/displayText"
-        android:layout_alignLeft="@+id/enter"
-        android:layout_alignStart="@+id/enter"
-        android:layout_alignRight="@+id/enter"
-        android:layout_alignEnd="@+id/enter" />
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/medium_logo"
-        android:src="@drawable/logo_medium"
-        android:layout_marginTop="25dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_below="@+id/passCodeHelp"
-        android:layout_alignLeft="@+id/enter"
-        android:layout_alignStart="@+id/enter" />
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -56,33 +28,61 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/medium_logo"
+        android:src="@drawable/logo_small"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="displayText"
         android:id="@+id/displayText"
-        android:layout_marginTop="40dp"
-        android:layout_below="@id/medium_logo"
+        android:gravity="center_horizontal"
+        android:textSize="12sp"
+        android:layout_below="@+id/medium_logo"
         android:layout_centerHorizontal="true"
-        android:gravity="center_horizontal" />
+        android:layout_marginTop="28dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberPassword"
+        android:ems="10"
+        android:gravity="center"
+        android:id="@+id/passCode"
+        android:maxLength="4"
+        android:singleLine="true"
+        android:minWidth="50dp"
+        android:layout_below="@+id/displayText"
+        android:layout_marginTop="28dp"
+        android:layout_alignLeft="@+id/enter"
+        android:layout_alignStart="@+id/enter"
+        android:layout_alignRight="@+id/enter"
+        android:layout_alignEnd="@+id/enter" />
+
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/hintQuestion"
         android:inputType="text"
-        android:layout_below="@+id/passCode"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="27dp"
         android:hint="Your Security Question"
         android:gravity="center_horizontal"
-        android:layout_marginLeft="25dp"
         android:textSize="15sp"
         android:maxLines="2"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:textColorHint="@color/colorPrimary" />
+        android:textColorHint="@color/colorPrimary"
+        android:layout_marginTop="35dp"
+        android:layout_below="@+id/passCode"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="match_parent"
@@ -92,14 +92,12 @@
         android:hint="Security Answer"
         android:maxWidth="200dp"
         android:gravity="center_horizontal"
-        android:layout_below="@+id/hintQuestion"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
         android:textSize="15sp"
         android:textColorHint="@color/colorPrimary"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:layout_below="@+id/hintQuestion"
+        android:layout_alignRight="@+id/suggest"
+        android:layout_alignEnd="@+id/suggest" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -109,7 +107,7 @@
         android:onClick="authenticate"
         android:layout_below="@+id/hintAnswer"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp" />
+        android:layout_marginTop="27dp" />
 
     <ImageButton
         android:layout_width="wrap_content"

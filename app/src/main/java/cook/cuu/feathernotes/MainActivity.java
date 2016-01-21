@@ -9,7 +9,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,11 +36,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Log.d("MainActivity", "On Resume Called");
     }
 
+    public void noTraceBack(){
+        Intent intent = new Intent(this,Auth.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(this,Auth.class);
-        startActivity(intent);
+        noTraceBack();
     }
 
     @Override
@@ -115,6 +124,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void onToggleStar(View view){
+        ViewParent aa = view.getParent();
+        aa.requestLayout();
+        ViewParent bb = aa.getParent();
         if(view.getId() == R.id.favorite)
             Log.i("star", "This is star toggle");
 
@@ -124,7 +136,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("onItemClick", ">>>>>>" + id);
-        //callEditNote(position);
+        callEditNote(position);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.exit:
+                noTraceBack();
+                break;
+        }
+        return true;
     }
 
     @Override

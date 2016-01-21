@@ -30,7 +30,7 @@ public class PassCodeActionListDialog extends DialogFragment{
                 Intent intent = new Intent(getActivity(),PassCode.class);
                 intent.putExtra("action",which);
                 startActivity(intent);
-                Toast.makeText(getActivity(), "Question Selected ->" + actionsArray[which], Toast.LENGTH_LONG).show();
+//                Toast.makeText(getActivity(), "Question Selected ->" + actionsArray[which], Toast.LENGTH_LONG).show();
             }
         });
 

@@ -24,7 +24,7 @@ public class SecQListDialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Auth.hintQuestion.setText(questionsArray[which]);
-                Toast.makeText(getActivity(), "Question Selected ->" + questionsArray[which], Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "Question Selected ->" + questionsArray[which], Toast.LENGTH_LONG).show();
             }
         });
 
