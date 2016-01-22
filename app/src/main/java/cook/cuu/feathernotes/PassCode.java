@@ -51,17 +51,21 @@ public class PassCode extends AppCompatActivity {
         getUser();
 
         if(action == 0){
+            securityAnswerET.requestFocus();
             passCodeHead.setText("Forgot Passcode");
             changePassCodeET.setVisibility(View.GONE);
             cfmChangePassCodeET.setVisibility(View.GONE);
             currentPassCodeET.setVisibility(View.GONE);
             securityQuestionET.setNextFocusDownId(R.id.hintAnswer);
             securityAnswerET.setNextFocusDownId(R.id.changePassCodeButton);
+
         }
         else if(action == 1){
+            currentPassCodeET.requestFocus();
             passCodeHead.setText("Change Passcode");
             securityQuestionET.setVisibility(View.GONE);
             securityAnswerET.setVisibility(View.GONE);
+
         }
     }
 
