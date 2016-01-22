@@ -8,10 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,7 +23,8 @@ public class EditNotes extends AppCompatActivity {
 
     EditText editText;
     DbHelper dbHelper;
-    int position;
+    int position,rotation;
+    Display display;
     String current      =   null;
     boolean inserted    =   false;
     boolean edited      =   false;
@@ -29,9 +32,10 @@ public class EditNotes extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_edit_notes);
 
+        display         =   ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();;
+        rotation        =   display.getRotation();
         Intent intent   =   getIntent();
         position        =   intent.getIntExtra("noteId", -1);
         editText        =   (EditText) findViewById(R.id.editText);
@@ -47,7 +51,7 @@ public class EditNotes extends AppCompatActivity {
 
         if(position!= -1) {
             editText.setText(MainActivity.data.get(position));
-            current = (MainActivity.data.get(position));
+            current     = (MainActivity.data.get(position));
         }
         else{
             editText.setText("");
@@ -59,14 +63,18 @@ public class EditNotes extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.i("Life", "onStop Called");
-        decideEditInsert();
+        int rotation    =   display.getRotation();
+        if(this.rotation == rotation)
+            decideEditInsert();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.i("Life", "onPause Called");
-        decideEditInsert();
+        int rotation    =   display.getRotation();
+        if(this.rotation == rotation)
+            decideEditInsert();
     }
 
     private void decideEditInsert(){
@@ -133,13 +141,13 @@ public class EditNotes extends AppCompatActivity {
     private void insertNote() {
         try {
             if (TextUtils.isEmpty(editText.getText())) {
-                Toast.makeText(this, "No Text Typed", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Nothing Written !!!", Toast.LENGTH_LONG).show();
                 Log.i("Life", "No Text Typed");
             } else {
 
-                dbHelper = new DbHelper(this);
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-                SQLiteStatement stmt = db.compileStatement("INSERT INTO notes (noteText,star) values (?,0);");
+                dbHelper                =   new DbHelper(this);
+                SQLiteDatabase db       =   dbHelper.getWritableDatabase();
+                SQLiteStatement stmt    =   db.compileStatement("INSERT INTO notes (noteText,star) values (?,0);");
                 stmt.bindString(1, String.valueOf(editText.getText()));
                 stmt.execute();
 

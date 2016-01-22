@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     static ArrayList<Integer> noteIdList;
     static ArrayList<Integer> starList;
     static ArrayAdapter<String> arrayAdapter;
+    static TweakedArrayAdapter tweakedArrayAdapter;
     ListView listView;
     static SQLiteDatabase notesDB;
 
@@ -108,11 +109,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void reloadListView() {
         listView        = (ListView) findViewById(R.id.listView);
-        arrayAdapter    = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
-        listView.setAdapter(arrayAdapter);
+        //arrayAdapter    = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
+        tweakedArrayAdapter = new TweakedArrayAdapter(this,data,starList);
+
+        listView.setAdapter(tweakedArrayAdapter);
         listView.setOnItemClickListener(this);
         listView.setOnItemLongClickListener(this);
-        arrayAdapter.notifyDataSetChanged();
+        tweakedArrayAdapter.notifyDataSetChanged();
     }
 
     public void callEditNote(int position){
