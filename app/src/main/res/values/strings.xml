@@ -22,5 +22,6 @@
         <item>Forgot Passcode</item>
         <item>Change Passcode</item>
     </string-array>
+    <string name="title_activity_despo">despo</string>
 
 </resources>
