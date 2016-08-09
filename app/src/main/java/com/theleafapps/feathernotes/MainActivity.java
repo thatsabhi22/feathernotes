@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void reloadListView() {
         listView        = (ListView) findViewById(R.id.listView);
-        //arrayAdapter    = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
+        arrayAdapter    = new ArrayAdapter<String>(this,R.layout.single_row,R.id.noteTextView,data);
         tweakedArrayAdapter = new TweakedArrayAdapter(this,data,starList);
 
         listView.setAdapter(tweakedArrayAdapter);
