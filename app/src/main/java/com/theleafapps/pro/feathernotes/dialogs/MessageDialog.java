@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

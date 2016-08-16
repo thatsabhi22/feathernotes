@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.utils;
 
 import android.content.Context;
 import android.graphics.Typeface;

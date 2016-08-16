@@ -1,21 +1,20 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.ui;
 
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.transition.Visibility;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
+
+import com.theleafapps.pro.feathernotes.R;
 
 public class PassCode extends AppCompatActivity {
 

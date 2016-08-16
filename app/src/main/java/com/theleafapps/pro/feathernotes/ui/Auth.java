@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.ui;
 
 import android.app.FragmentManager;
 import android.content.Context;
@@ -17,10 +17,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.dialogs.MessageDialog;
+import com.theleafapps.pro.feathernotes.dialogs.PassCodeActionListDialog;
+import com.theleafapps.pro.feathernotes.dialogs.SecQListDialog;
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
+
+import com.theleafapps.pro.feathernotes.R;
+
 public class Auth extends AppCompatActivity {
 
     EditText passCodeBox,hintAnswer;
-    static EditText hintQuestion;
+    public static EditText hintQuestion;
     TextView displayTextView;
     DbHelper dbHelper;
     boolean firstTimeFlag = false;

@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.dialogs;
 
 import android.app.Activity;
 import android.app.DialogFragment;
@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.theleafapps.pro.feathernotes.ui.MainActivity;
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
+
+import com.theleafapps.pro.feathernotes.R;
 
 /**
  * Created by aviator on 29/11/15.
@@ -63,7 +68,7 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
         }
     }
 
-    interface Communicator{
+    public interface Communicator{
         public void dialogMessage(String msg);
     }
 }

@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,7 +6,10 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.widget.Toast;
+
+import com.theleafapps.pro.feathernotes.ui.Auth;
+
+import com.theleafapps.pro.feathernotes.R;
 
 /**
  * Created by aviator on 18/01/16.

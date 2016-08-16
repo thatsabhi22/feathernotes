@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.ui;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,10 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
+
+import com.theleafapps.pro.feathernotes.R;
 
 public class EditNotes extends AppCompatActivity {
 

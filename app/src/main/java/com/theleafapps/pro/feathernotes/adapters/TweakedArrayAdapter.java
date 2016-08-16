@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.adapters;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,7 +11,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.theleafapps.pro.feathernotes.ui.MainActivity;
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
+
 import java.util.ArrayList;
+
+import com.theleafapps.pro.feathernotes.R;
 
 /**
  * Created by aviator on 22/01/16.

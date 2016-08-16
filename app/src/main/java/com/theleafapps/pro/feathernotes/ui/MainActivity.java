@@ -1,4 +1,4 @@
-package cook.cuu.feathernotes;
+package com.theleafapps.pro.feathernotes.ui;
 
 import android.app.FragmentManager;
 import android.content.Intent;
@@ -19,13 +19,18 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.dialogs.SimpleDialogClass;
+import com.theleafapps.pro.feathernotes.adapters.TweakedArrayAdapter;
+
 import java.util.ArrayList;
+
+import com.theleafapps.pro.feathernotes.R;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AdapterView.OnItemLongClickListener,SimpleDialogClass.Communicator {
 
     static ArrayList<String> data ;
-    static ArrayList<Integer> noteIdList;
-    static ArrayList<Integer> starList;
+    public static ArrayList<Integer> noteIdList;
+    public static ArrayList<Integer> starList;
     static ArrayAdapter<String> arrayAdapter;
     static TweakedArrayAdapter tweakedArrayAdapter;
     ListView listView;
