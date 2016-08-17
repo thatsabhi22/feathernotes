@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     static TweakedArrayAdapter tweakedArrayAdapter;
     ListView listView;
     static SQLiteDatabase notesDB;
+    ActionBar actionBar;
 
     @Override
     protected void onResume() {
@@ -61,6 +63,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setIcon(R.drawable.logo_small);
+        getSupportActionBar().setTitle("  Feather Notes");
 
         dbAccess();
 

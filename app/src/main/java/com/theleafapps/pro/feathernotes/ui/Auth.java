@@ -7,13 +7,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Color;
+import android.graphics.Path;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +31,9 @@ public class Auth extends AppCompatActivity {
 
     EditText passCodeBox,hintAnswer;
     public static EditText hintQuestion;
-    TextView displayTextView;
+    TextView displayTextView,aboutButton,creditsButton;;
     DbHelper dbHelper;
+    ImageView passCodeHelp;
     boolean firstTimeFlag = false;
     ImageButton imageButton;
 
@@ -38,14 +42,35 @@ public class Auth extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
         try{
+            passCodeHelp    =   (ImageView) findViewById(R.id.passCodeHelp);
             passCodeBox     =   (EditText) findViewById(R.id.passCode);
             hintQuestion    =   (EditText) findViewById(R.id.hintQuestion);
             hintAnswer      =   (EditText) findViewById(R.id.hintAnswer);
             displayTextView =   (TextView) findViewById(R.id.displayText);
             imageButton     =   (ImageButton) findViewById(R.id.suggest);
+            aboutButton     =   (TextView) findViewById(R.id.about_button);
+            creditsButton   =   (TextView) findViewById(R.id.credits_button);
+
+            passCodeBox.requestFocus(View.LAYOUT_DIRECTION_LTR);
 
             Intent intent   = getIntent();
             String code     = intent.getStringExtra("Msg");
+
+            aboutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Auth.this,About.class);
+                    startActivity(intent);
+                }
+            });
+
+            creditsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(Auth.this,Credits.class);
+                    startActivity(intent);
+                }
+            });
 
             if(TextUtils.isEmpty(code)){
 
@@ -63,6 +88,7 @@ public class Auth extends AppCompatActivity {
                     displayTextView.setText("You're First time using this app. Create Your own Passcode");
                     passCodeBox.setNextFocusDownId(R.id.hintQuestion);
                     hintQuestion.setNextFocusDownId(R.id.hintAnswer);
+                    passCodeHelp.setVisibility(View.INVISIBLE);
                     firstTimeFlag = true;
                 }
                 else{

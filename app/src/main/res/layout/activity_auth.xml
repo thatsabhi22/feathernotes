@@ -122,5 +122,31 @@
         android:layout_alignRight="@+id/hintQuestion"
         android:layout_alignEnd="@+id/hintQuestion" />
 
+    <com.theleafapps.pro.feathernotes.utils.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="About"
+        android:id="@+id/about_button"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:layout_below="@+id/changePassCodeButton"
+        android:layout_toLeftOf="@+id/confirmChangePassCode"
+        android:layout_toStartOf="@+id/confirmChangePassCode" />
+
+    <com.theleafapps.pro.feathernotes.utils.MyCustomTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Credits"
+        android:id="@+id/credits_button"
+        android:textSize="16sp"
+        android:textColor="@color/colorPrimary"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/about_button"
+        android:layout_toEndOf="@+id/about_button" />
+
 </RelativeLayout>
     </ScrollView>

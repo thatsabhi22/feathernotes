@@ -99,6 +99,7 @@ public class PassCode extends AppCompatActivity {
             if(TextUtils.equals(securityAnswer,hintAnswer)){
                 Intent intent = new Intent(this,Auth.class);
                 intent.putExtra("Msg",passCode);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
             else{
@@ -119,6 +120,7 @@ public class PassCode extends AppCompatActivity {
                                 Toast.makeText(this,"All set",Toast.LENGTH_LONG).show();
                                 updatePassCode(currentPassCode, changePassCode);
                                 Intent intent = new Intent(this,Auth.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 
                             } else {
