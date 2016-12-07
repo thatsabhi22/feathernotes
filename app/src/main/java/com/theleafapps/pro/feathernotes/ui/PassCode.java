@@ -1,5 +1,6 @@
 package com.theleafapps.pro.feathernotes.ui;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,11 +8,14 @@ import android.database.sqlite.SQLiteStatement;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.utils.Commons;
 import com.theleafapps.pro.feathernotes.utils.DbHelper;
 
 import com.theleafapps.pro.feathernotes.R;
@@ -156,5 +160,31 @@ public class PassCode extends AppCompatActivity {
         }catch(Exception ex){
             ex.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+
+        boolean handleReturn = super.dispatchTouchEvent(ev);
+
+        View view = getCurrentFocus();
+
+        int x = (int) ev.getX();
+        int y = (int) ev.getY();
+
+        if(view instanceof EditText){
+            EditText innerView = (EditText) getCurrentFocus();
+
+            if (ev.getAction() == MotionEvent.ACTION_UP &&
+                    ! Commons.getLocationOnScreen(innerView).contains(x, y)) {
+
+                InputMethodManager input = (InputMethodManager)
+                        getSystemService(Context.INPUT_METHOD_SERVICE);
+                input.hideSoftInputFromWindow(getWindow().getCurrentFocus()
+                        .getWindowToken(), 0);
+            }
+        }
+
+        return handleReturn;
     }
 }
