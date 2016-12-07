@@ -97,7 +97,7 @@ public class Auth extends AppCompatActivity {
                 }
             }else{
                 Bundle bundle = new Bundle();
-                bundle.putString("Msg", code);
+                bundle.putString("Msg", "Your PassCode id : " + code);
                 FragmentManager fm = getFragmentManager();
                 MessageDialog messageDialog = new MessageDialog();
                 messageDialog.setArguments(bundle);

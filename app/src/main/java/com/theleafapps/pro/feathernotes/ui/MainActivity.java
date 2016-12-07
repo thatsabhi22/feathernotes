@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.dialogs.MessageDialog;
 import com.theleafapps.pro.feathernotes.dialogs.SimpleDialogClass;
 import com.theleafapps.pro.feathernotes.adapters.TweakedArrayAdapter;
 
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     static TweakedArrayAdapter tweakedArrayAdapter;
     ListView listView;
     static SQLiteDatabase notesDB;
+    FragmentManager fragmentManager;
+    SimpleDialogClass dc;
+    MessageDialog messageDialog;
+    Bundle bb;
 
     @Override
     protected void onResume() {
@@ -48,6 +53,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         startActivity(intent);
     }
 
+    public void showLongPressDialog(){
+        String longPressMsg =   "Press and hold to delete note.";
+        messageDialog       =   new MessageDialog();
+        bb                  =   new Bundle();
+        bb.putString("Msg",longPressMsg);
+        messageDialog.setArguments(bb);
+        messageDialog.show(fragmentManager, "messageDialog");
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -58,6 +72,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fragmentManager  =  getFragmentManager();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -163,6 +179,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             case R.id.exit:
                 noTraceBack();
                 break;
+            case R.id.pressHold:
+                showLongPressDialog();
+                break;
         }
         return true;
     }
@@ -170,13 +189,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
         Log.d("Long Press","onItemLongClick Called");
-        FragmentManager fragmentManager  = getFragmentManager();
-        SimpleDialogClass dc = new SimpleDialogClass();
-        Bundle bb = new Bundle();
+        dc               =  new SimpleDialogClass();
+        bb               =  new Bundle();
         bb.putInt("position",position);
         dc.setArguments(bb);
         dc.show(fragmentManager, "Dio");
-        return false;
+        return true;
     }
 
     @Override

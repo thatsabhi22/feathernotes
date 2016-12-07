@@ -4,6 +4,12 @@
     tools:context="com.theleafapps.pro.feathernotes.ui.EditNotes">
 
     <item
+        android:id="@+id/pressHold"
+        android:icon="@drawable/tap"
+        android:title="Hold"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/exit"
         android:icon="@drawable/exit"
         android:title="Exit"

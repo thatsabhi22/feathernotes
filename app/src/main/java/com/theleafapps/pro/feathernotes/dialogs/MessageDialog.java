@@ -23,7 +23,7 @@ public class MessageDialog extends DialogFragment {
         bundle  =   getArguments();
         code    =   TextUtils.isEmpty(bundle.getString("Msg")) ? "" : bundle.getString("Msg");
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("Your PassCode id : " + code);
+        builder.setMessage(code);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
