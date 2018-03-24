@@ -11,12 +11,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.theleafapps.pro.feathernotes.R;
 import com.theleafapps.pro.feathernotes.ui.MainActivity;
 import com.theleafapps.pro.feathernotes.utils.DbHelper;
 
 import java.util.ArrayList;
-
-import com.theleafapps.pro.feathernotes.R;
 
 /**
  * Created by aviator on 22/01/16.
@@ -31,10 +30,10 @@ public class TweakedArrayAdapter extends ArrayAdapter<String> implements View.On
     ArrayList<Integer> stars;
     int position;
 
-    public TweakedArrayAdapter(Context context,ArrayList<String> values, ArrayList<Integer> stars){
-        super(context,-1,values);
-        this.values  =  values;
-        this.stars   =  stars;
+    public TweakedArrayAdapter(Context context, ArrayList<String> values, ArrayList<Integer> stars) {
+        super(context, -1, values);
+        this.values = values;
+        this.stars = stars;
     }
 
     @Override
@@ -50,7 +49,7 @@ public class TweakedArrayAdapter extends ArrayAdapter<String> implements View.On
         // change the icon for Windows and iPhone
         String s = values.get(position);
 
-        if (stars.get(position)== 1) {
+        if (stars.get(position) == 1) {
             imageView.setImageResource(R.drawable.solid_red_star);
         } else {
             imageView.setImageResource(R.drawable.hollow_star_30_30);
@@ -70,12 +69,11 @@ public class TweakedArrayAdapter extends ArrayAdapter<String> implements View.On
                 View child = listView.getChildAt(position);
                 ImageView img = (ImageView) child.findViewById(R.id.favorite);
 //                Toast.makeText(getContext()," position ->" + position,Toast.LENGTH_LONG).show();
-                if(MainActivity.starList.get(position) == 1){
+                if (MainActivity.starList.get(position) == 1) {
                     img.setImageResource(R.drawable.hollow_star_30_30);
                     MainActivity.starList.set(position, 0);
-                    updateStar(MainActivity.noteIdList.get(position),0);
-                }
-                else{
+                    updateStar(MainActivity.noteIdList.get(position), 0);
+                } else {
                     img.setImageResource(R.drawable.solid_red_star);
                     MainActivity.starList.set(position, 1);
                     updateStar(MainActivity.noteIdList.get(position), 1);
@@ -87,7 +85,7 @@ public class TweakedArrayAdapter extends ArrayAdapter<String> implements View.On
         }
     }
 
-    public void updateStar(int id,int set) {
+    public void updateStar(int id, int set) {
         dbHelper = new DbHelper(getContext());
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("UPDATE notes SET star = ? where id = ?;");

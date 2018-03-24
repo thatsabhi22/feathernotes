@@ -11,23 +11,23 @@
     tools:context="com.theleafapps.pro.feathernotes.ui.SplashScreen">
 
     <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
-        android:src="@drawable/feather"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="71dp" />
+        android:layout_marginTop="71dp"
+        android:src="@drawable/feather" />
 
     <TextView
+        android:id="@+id/appTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Feather Notes"
-        android:id="@+id/appTitle"
-        android:layout_marginTop="69dp"
-        android:textColor="#eb6d6d"
-        android:textSize="40sp"
         android:layout_below="@+id/imageView"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="69dp"
+        android:text="Feather Notes"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#eb6d6d"
+        android:textSize="40sp" />
 </RelativeLayout>

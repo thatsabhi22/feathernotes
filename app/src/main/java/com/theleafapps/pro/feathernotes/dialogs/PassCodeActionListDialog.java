@@ -9,14 +9,13 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Window;
 
-import com.theleafapps.pro.feathernotes.ui.PassCode;
-
 import com.theleafapps.pro.feathernotes.R;
+import com.theleafapps.pro.feathernotes.ui.PassCode;
 
 /**
  * Created by aviator on 19/01/16.
  */
-public class PassCodeActionListDialog extends DialogFragment{
+public class PassCodeActionListDialog extends DialogFragment {
 
     String[] actionsArray;
 
@@ -30,8 +29,8 @@ public class PassCodeActionListDialog extends DialogFragment{
         builder.setItems(R.array.passCodeActions, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(getActivity(),PassCode.class);
-                intent.putExtra("action",which);
+                Intent intent = new Intent(getActivity(), PassCode.class);
+                intent.putExtra("action", which);
                 startActivity(intent);
 //                Toast.makeText(getActivity(), "Question Selected ->" + actionsArray[which], Toast.LENGTH_LONG).show();
             }

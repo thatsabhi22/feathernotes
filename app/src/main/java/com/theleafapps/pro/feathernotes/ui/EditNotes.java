@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
@@ -19,9 +19,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.theleafapps.pro.feathernotes.utils.DbHelper;
-
 import com.theleafapps.pro.feathernotes.R;
+import com.theleafapps.pro.feathernotes.utils.DbHelper;
 
 public class EditNotes extends AppCompatActivity {
 
@@ -29,25 +28,26 @@ public class EditNotes extends AppCompatActivity {
     EditText editText;
     DbHelper dbHelper;
     ActionBar actionBar;
-    int position,rotation;
+    int position, rotation;
     Display display;
-    String current      =   null;
-    boolean inserted    =   false;
-    boolean edited      =   false;
+    String current = null;
+    boolean inserted = false;
+    boolean edited = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_notes);
 
-        display         =   ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();;
-        rotation        =   display.getRotation();
-        Intent intent   =   getIntent();
-        position        =   intent.getIntExtra("noteId", -1);
-        editText        =   (EditText) findViewById(R.id.editText);
+        display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        ;
+        rotation = display.getRotation();
+        Intent intent = getIntent();
+        position = intent.getIntExtra("noteId", -1);
+        editText = (EditText) findViewById(R.id.editText);
         editText.setTypeface(SplashScreen.typeface);
 
-        actionBar       =   getSupportActionBar();
+        actionBar = getSupportActionBar();
         actionBar.setIcon(R.drawable.logo_small);
         actionBar.setTitle("  Feather Notes");
 
@@ -58,15 +58,14 @@ public class EditNotes extends AppCompatActivity {
                         getSystemService(Context.INPUT_METHOD_SERVICE);
                 keyboard.showSoftInput(editText, 0);
             }
-        },200);
+        }, 200);
 
-        if(position!= -1) {
+        if (position != -1) {
             editText.setText(MainActivity.data.get(position));
-            current     = (MainActivity.data.get(position));
-        }
-        else{
+            current = (MainActivity.data.get(position));
+        } else {
             editText.setText("");
-            current     =   "";
+            current = "";
         }
     }
 
@@ -74,8 +73,8 @@ public class EditNotes extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         Log.i("Life", "onStop Called");
-        int rotation    =   display.getRotation();
-        if(this.rotation == rotation)
+        int rotation = display.getRotation();
+        if (this.rotation == rotation)
             decideEditInsert();
     }
 
@@ -83,15 +82,15 @@ public class EditNotes extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         Log.i("Life", "onPause Called");
-        int rotation    =   display.getRotation();
-        if(this.rotation == rotation)
+        int rotation = display.getRotation();
+        if (this.rotation == rotation)
             decideEditInsert();
     }
 
-    private void decideEditInsert(){
-        if(position == -1 && !inserted)
+    private void decideEditInsert() {
+        if (position == -1 && !inserted)
             insertNote();
-        else if(!TextUtils.equals(current,editText.getText()) && !edited && !inserted)
+        else if (!TextUtils.equals(current, editText.getText()) && !edited && !inserted)
             editNote();
     }
 
@@ -127,8 +126,8 @@ public class EditNotes extends AppCompatActivity {
         switchToHome();
     }
 
-    public void switchToHome(){
-        Intent intent = new Intent(this,MainActivity.class);
+    public void switchToHome() {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
@@ -156,17 +155,17 @@ public class EditNotes extends AppCompatActivity {
                 Log.i("Life", "No Text Typed");
             } else {
 
-                dbHelper                =   new DbHelper(this);
-                SQLiteDatabase db       =   dbHelper.getWritableDatabase();
-                SQLiteStatement stmt    =   db.compileStatement("INSERT INTO notes (noteText,star) values (?,0);");
+                dbHelper = new DbHelper(this);
+                SQLiteDatabase db = dbHelper.getWritableDatabase();
+                SQLiteStatement stmt = db.compileStatement("INSERT INTO notes (noteText,star) values (?,0);");
                 stmt.bindString(1, String.valueOf(editText.getText()));
                 stmt.execute();
 
                 inserted = true;
                 Toast.makeText(this, "Note Added ..", Toast.LENGTH_SHORT).show();
-                Log.i("Life","Note Inserted ..");
+                Log.i("Life", "Note Inserted ..");
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -188,10 +187,10 @@ public class EditNotes extends AppCompatActivity {
 
                 edited = true;
                 Toast.makeText(this, "Note Edited ..", Toast.LENGTH_SHORT).show();
-                Log.i("Life","Note Edited ..");
+                Log.i("Life", "Note Edited ..");
 
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

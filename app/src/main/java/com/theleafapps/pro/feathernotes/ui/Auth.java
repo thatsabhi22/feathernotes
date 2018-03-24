@@ -7,8 +7,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,19 +19,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.R;
 import com.theleafapps.pro.feathernotes.dialogs.MessageDialog;
 import com.theleafapps.pro.feathernotes.dialogs.PassCodeActionListDialog;
 import com.theleafapps.pro.feathernotes.dialogs.SecQListDialog;
 import com.theleafapps.pro.feathernotes.utils.Commons;
 import com.theleafapps.pro.feathernotes.utils.DbHelper;
 
-import com.theleafapps.pro.feathernotes.R;
-
 public class Auth extends AppCompatActivity {
 
-    EditText passCodeBox,hintAnswer;
     public static EditText hintQuestion;
-    TextView displayTextView,aboutButton,creditsButton;;
+    EditText passCodeBox, hintAnswer;
+    TextView displayTextView, aboutButton, creditsButton;
+    ;
     DbHelper dbHelper;
     ImageView passCodeHelp;
     boolean firstTimeFlag = false;
@@ -41,25 +41,25 @@ public class Auth extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-        try{
-            passCodeHelp    =   (ImageView) findViewById(R.id.passCodeHelp);
-            passCodeBox     =   (EditText) findViewById(R.id.passCode);
-            hintQuestion    =   (EditText) findViewById(R.id.hintQuestion);
-            hintAnswer      =   (EditText) findViewById(R.id.hintAnswer);
-            displayTextView =   (TextView) findViewById(R.id.displayText);
-            imageButton     =   (ImageButton) findViewById(R.id.suggest);
-            aboutButton     =   (TextView) findViewById(R.id.about_button);
-            creditsButton   =   (TextView) findViewById(R.id.credits_button);
+        try {
+            passCodeHelp = (ImageView) findViewById(R.id.passCodeHelp);
+            passCodeBox = (EditText) findViewById(R.id.passCode);
+            hintQuestion = (EditText) findViewById(R.id.hintQuestion);
+            hintAnswer = (EditText) findViewById(R.id.hintAnswer);
+            displayTextView = (TextView) findViewById(R.id.displayText);
+            imageButton = (ImageButton) findViewById(R.id.suggest);
+            aboutButton = (TextView) findViewById(R.id.about_button);
+            creditsButton = (TextView) findViewById(R.id.credits_button);
 
             passCodeBox.requestFocus(View.LAYOUT_DIRECTION_LTR);
 
-            Intent intent   = getIntent();
-            String code     = intent.getStringExtra("Msg");
+            Intent intent = getIntent();
+            String code = intent.getStringExtra("Msg");
 
             aboutButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Auth.this,About.class);
+                    Intent intent = new Intent(Auth.this, About.class);
                     startActivity(intent);
                 }
             });
@@ -67,12 +67,12 @@ public class Auth extends AppCompatActivity {
             creditsButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(Auth.this,Credits.class);
+                    Intent intent = new Intent(Auth.this, Credits.class);
                     startActivity(intent);
                 }
             });
 
-            if(TextUtils.isEmpty(code)){
+            if (TextUtils.isEmpty(code)) {
 
                 displayTextView.setTypeface(SplashScreen.typeface);
                 displayTextView.setTextColor(getResources().getColor(R.color.colorPrimary));
@@ -83,19 +83,18 @@ public class Auth extends AppCompatActivity {
                 MainActivity.notesDB = this.openOrCreateDatabase("featherNotesDB", MODE_PRIVATE, null);
                 MainActivity.notesDB.execSQL("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, passCode INTEGER, hintQuestion VARCHAR,hintAnswer VARCHAR);");
 
-                if(checkIfFirstTime()){
+                if (checkIfFirstTime()) {
 //                    Toast.makeText(this,"First Time User ....",Toast.LENGTH_LONG).show();
                     displayTextView.setText("You're First time using this app. Create Your own Passcode");
                     passCodeBox.setNextFocusDownId(R.id.hintQuestion);
                     hintQuestion.setNextFocusDownId(R.id.hintAnswer);
                     passCodeHelp.setVisibility(View.INVISIBLE);
                     firstTimeFlag = true;
-                }
-                else{
+                } else {
 //                    Toast.makeText(this,"Returning User ....",Toast.LENGTH_LONG).show();
                     returningUserVisibility();
                 }
-            }else{
+            } else {
                 Bundle bundle = new Bundle();
                 bundle.putString("Msg", "Your PassCode id : " + code);
                 FragmentManager fm = getFragmentManager();
@@ -104,22 +103,23 @@ public class Auth extends AppCompatActivity {
                 messageDialog.show(fm, "messageDialog");
                 returningUserVisibility();
             }
-        }catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public void returningUserVisibility(){
+    public void returningUserVisibility() {
         displayTextView.setText("Enter Passcode");
         hintQuestion.setVisibility(View.GONE);
         hintAnswer.setVisibility(View.GONE);
         imageButton.setVisibility(View.GONE);
     }
-    public boolean checkIfFirstTime(){
-        Cursor c    =   MainActivity.notesDB.rawQuery("SELECT id,passCode from users;", null);
-        int count   =   c.getCount();
+
+    public boolean checkIfFirstTime() {
+        Cursor c = MainActivity.notesDB.rawQuery("SELECT id,passCode from users;", null);
+        int count = c.getCount();
         c.close();
-        if(count > 0){
+        if (count > 0) {
             return false;
         }
         return true;
@@ -147,76 +147,69 @@ public class Auth extends AppCompatActivity {
                     keyboard.showSoftInput(passCodeBox, 0);
                 }
             }, 200);
-        }
-        catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-    public void authenticate(View view){
-        if(firstTimeFlag){
+    public void authenticate(View view) {
+        if (firstTimeFlag) {
             // For first time entry to app
-            if(passCodeBox.length() == 4){
-                if(!TextUtils.isEmpty(hintQuestion.getText())){
-                    if(!TextUtils.isEmpty(hintAnswer.getText())){
-                        savePassCode(String.valueOf(passCodeBox.getText()), String.valueOf(hintQuestion.getText()),String.valueOf(hintAnswer.getText()));
-                        Toast.makeText(this,"Your Passcode has been created.",Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(this,MainActivity.class);
+            if (passCodeBox.length() == 4) {
+                if (!TextUtils.isEmpty(hintQuestion.getText())) {
+                    if (!TextUtils.isEmpty(hintAnswer.getText())) {
+                        savePassCode(String.valueOf(passCodeBox.getText()), String.valueOf(hintQuestion.getText()), String.valueOf(hintAnswer.getText()));
+                        Toast.makeText(this, "Your Passcode has been created.", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
-                    }
-                    else{
+                    } else {
                         displayTextView.setTextColor(Color.RED);
                         displayTextView.setText("Please Enter Your Security Answer");
                     }
-                }
-                else{
+                } else {
                     displayTextView.setTextColor(Color.RED);
                     displayTextView.setText("Please Enter Your Security Question or Click on suggest.");
                 }
-            }
-            else{
+            } else {
                 displayTextView.setTextColor(Color.RED);
                 displayTextView.setText("Please Enter 4 Digit Passcode.");
             }
-        }
-        else{
-            if(passCodeBox.length() == 4){
-                if(checkValidUser(String.valueOf(passCodeBox.getText()))){
+        } else {
+            if (passCodeBox.length() == 4) {
+                if (checkValidUser(String.valueOf(passCodeBox.getText()))) {
 //                    Toast.makeText(this,"Entry Valid",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(this,MainActivity.class);
+                    Intent intent = new Intent(this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
-                }
-                else{
+                } else {
                     passCodeBox.setText("");
                     displayTextView.setTextColor(Color.RED);
                     displayTextView.setText("Please Enter Valid Passcode.");
                 }
                 //For entry as a returning user to the app
-            }
-            else{
+            } else {
                 displayTextView.setTextColor(Color.RED);
                 displayTextView.setText("Please Enter 4 Digit Passcode.");
             }
         }
     }
 
-    public void displayHintQuestionDialog(View view){
-        FragmentManager fragmentManager  = getFragmentManager();
+    public void displayHintQuestionDialog(View view) {
+        FragmentManager fragmentManager = getFragmentManager();
         SecQListDialog ldc = new SecQListDialog();
         ldc.show(fragmentManager, "securityQuestionDialog");
     }
 
-    public void openPassCodeHelpDialog(View view){
-        FragmentManager fragmentManager  = getFragmentManager();
+    public void openPassCodeHelpDialog(View view) {
+        FragmentManager fragmentManager = getFragmentManager();
         PassCodeActionListDialog passCodeActionListDialog = new PassCodeActionListDialog();
         passCodeActionListDialog.show(fragmentManager, "passCodeHelpDialog");
     }
 
     private void savePassCode(String passCode, String hintQuestion, String hintAnswer) {
 
-        try{
+        try {
 
             dbHelper = new DbHelper(this);
             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -226,7 +219,7 @@ public class Auth extends AppCompatActivity {
             stmt.bindString(3, hintAnswer);
             stmt.execute();
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
@@ -241,11 +234,11 @@ public class Auth extends AppCompatActivity {
         int x = (int) ev.getX();
         int y = (int) ev.getY();
 
-        if(view instanceof EditText){
+        if (view instanceof EditText) {
             EditText innerView = (EditText) getCurrentFocus();
 
             if (ev.getAction() == MotionEvent.ACTION_UP &&
-                    ! Commons.getLocationOnScreen(innerView).contains(x, y)) {
+                    !Commons.getLocationOnScreen(innerView).contains(x, y)) {
 
                 InputMethodManager input = (InputMethodManager)
                         getSystemService(Context.INPUT_METHOD_SERVICE);

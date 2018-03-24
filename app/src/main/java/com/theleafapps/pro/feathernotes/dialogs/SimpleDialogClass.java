@@ -10,18 +10,17 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.theleafapps.pro.feathernotes.R;
 import com.theleafapps.pro.feathernotes.ui.MainActivity;
 import com.theleafapps.pro.feathernotes.utils.DbHelper;
-
-import com.theleafapps.pro.feathernotes.R;
 
 /**
  * Created by aviator on 29/11/15.
  */
-public class SimpleDialogClass extends DialogFragment implements View.OnClickListener{
+public class SimpleDialogClass extends DialogFragment implements View.OnClickListener {
 
     Bundle bundle;
-    Button yes,no;
+    Button yes, no;
     Communicator comm;
     DbHelper dbHelper;
     int position;
@@ -35,10 +34,10 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        bundle      =   getArguments();
-        View view   =   inflater.inflate(R.layout.dialog_layout,null);
-        yes         =   (Button) view.findViewById(R.id.yes);
-        no          =   (Button) view.findViewById(R.id.no);
+        bundle = getArguments();
+        View view = inflater.inflate(R.layout.dialog_layout, null);
+        yes = (Button) view.findViewById(R.id.yes);
+        no = (Button) view.findViewById(R.id.no);
         yes.setOnClickListener(this);
         no.setOnClickListener(this);
         setCancelable(false);
@@ -49,26 +48,25 @@ public class SimpleDialogClass extends DialogFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         dbHelper = new DbHelper(getActivity().getApplicationContext());
-        try{
-            if (v.getId()==R.id.yes){
+        try {
+            if (v.getId() == R.id.yes) {
                 position = bundle.getInt("position");
                 dbHelper.deleteNote(MainActivity.noteIdList.get(position));
-                Toast.makeText(getActivity().getApplicationContext(),"Note Deleted",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity().getApplicationContext(), "Note Deleted", Toast.LENGTH_SHORT).show();
                 bundle.clear();
                 dismiss();
                 comm.dialogMessage("Yes Was Clicked with position - " + position);
-            }
-            else{
+            } else {
                 dismiss();
                 comm.dialogMessage("No was clicked.");
                 //Toast.makeText(getActivity(),"No Was Clicked",Toast.LENGTH_LONG).show();
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public interface Communicator{
+    public interface Communicator {
         public void dialogMessage(String msg);
     }
 }

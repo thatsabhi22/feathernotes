@@ -3,120 +3,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.theleafapps.pro.feathernotes.ui.PassCode"
-    android:background="#ffffff"
-    android:focusable="false"
-    android:focusableInTouchMode="true">
+    tools:context="com.theleafapps.pro.feathernotes.ui.PassCode">
 
     <com.theleafapps.pro.feathernotes.utils.MyCustomTextView
+        android:id="@+id/passCodeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="&lt;Head placeholder>"
-        android:id="@+id/passCodeTextView"
-        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:text="&lt;Head placeholder>"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textSize="12sp" />
 
     <EditText
+        android:id="@+id/changePassCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/changePassCode"
-        android:minWidth="150dp"
-        android:maxLength="4"
-        android:gravity="center_horizontal"
-        android:hint="New Pass Code"
-        android:textSize="10sp"
-        android:maxLines="1"
-        android:password="true"
-        android:textColorHint="@color/colorPrimary"
         android:layout_below="@+id/currentPassCode"
         android:layout_centerHorizontal="true"
-        android:inputType="numberPassword" />
+        android:gravity="center_horizontal"
+        android:hint="New Pass Code"
+        android:inputType="numberPassword"
+        android:maxLength="4"
+        android:maxLines="1"
+        android:minWidth="150dp"
+        android:password="true"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="10sp" />
 
     <EditText
+        android:id="@+id/confirmChangePassCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/confirmChangePassCode"
-        android:minWidth="150dp"
-        android:maxLength="4"
+        android:layout_below="@+id/changePassCode"
+        android:layout_centerHorizontal="true"
         android:gravity="center_horizontal"
         android:hint="Confirm Pass Code"
-        android:textSize="10sp"
+        android:inputType="numberPassword"
+        android:maxLength="4"
         android:maxLines="1"
+        android:minWidth="150dp"
         android:password="true"
         android:textColorHint="@color/colorPrimary"
         android:textIsSelectable="false"
-        android:layout_below="@+id/changePassCode"
-        android:layout_centerHorizontal="true"
-        android:inputType="numberPassword" />
+        android:textSize="10sp" />
 
     <ImageView
+        android:id="@+id/passCodeLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/passCodeLogo"
-        android:src="@drawable/logo_small"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/logo_small" />
 
     <EditText
+        android:id="@+id/currentPassCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/currentPassCode"
-        android:minWidth="150dp"
+        android:layout_below="@+id/passCodeTextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
         android:hint="Current Pass Code"
-        android:password="true"
-        android:textSize="10sp"
+        android:inputType="numberPassword"
         android:maxLength="4"
         android:maxLines="1"
+        android:minWidth="150dp"
+        android:password="true"
         android:textColorHint="@color/colorPrimary"
-        android:layout_marginTop="25dp"
-        android:inputType="numberPassword"
-        android:gravity="center_horizontal"
-        android:layout_below="@+id/passCodeTextView"
-        android:layout_centerHorizontal="true" />
+        android:textSize="10sp" />
 
     <ImageButton
+        android:id="@+id/changePassCodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/changePassCodeButton"
-        android:src="@drawable/enter_small"
-        android:onClick="changePassCode"
-        android:background="#ffffff"
-        android:layout_marginTop="20dp"
         android:layout_below="@+id/securityAnswer"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="#ffffff"
+        android:onClick="changePassCode"
+        android:src="@drawable/enter_small" />
 
     <EditText
+        android:id="@+id/securityQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/securityQuestion"
-        android:maxLines="2"
-        android:textSize="12sp"
-        android:hint="Security Question"
-        android:gravity="center_horizontal"
-        android:textColorHint="@color/colorPrimary"
-        android:layout_below="@+id/confirmChangePassCode"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_below="@+id/confirmChangePassCode"
         android:layout_marginTop="20dp"
-        android:focusable="false" />
+        android:focusable="false"
+        android:gravity="center_horizontal"
+        android:hint="Security Question"
+        android:maxLines="2"
+        android:textColorHint="@color/colorPrimary"
+        android:textSize="12sp" />
 
     <EditText
+        android:id="@+id/securityAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/securityAnswer"
         android:layout_below="@+id/securityQuestion"
         android:layout_centerHorizontal="true"
-        android:hint="Your answer"
         android:gravity="center_horizontal"
-        android:textSize="12sp"
+        android:hint="Your answer"
+        android:singleLine="true"
         android:textColorHint="@color/colorPrimary"
-        android:singleLine="true" />
+        android:textSize="12sp" />
 
 </RelativeLayout>

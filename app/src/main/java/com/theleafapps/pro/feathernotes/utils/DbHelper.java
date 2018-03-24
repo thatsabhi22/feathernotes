@@ -15,8 +15,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "featherNotesDB";
     private Context context;
 
-    public DbHelper(Context context){
-        super(context,DATABASE_NAME,null,DATABASE_VERSION);
+    public DbHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
@@ -34,7 +34,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     }
 
-    public void deleteNote(int id){
+    public void deleteNote(int id) {
 
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteStatement stmt = db.compileStatement("DELETE FROM notes where id = ?;");
@@ -42,6 +42,6 @@ public class DbHelper extends SQLiteOpenHelper {
         stmt.execute();
         //MainActivity.arrayAdapter.notifyDataSetChanged();
 
-        Log.i("Life","Note Deleted ..");
+        Log.i("Life", "Note Deleted ..");
     }
 }

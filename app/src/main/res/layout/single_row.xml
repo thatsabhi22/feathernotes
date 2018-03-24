@@ -4,31 +4,32 @@
     android:layout_height="match_parent"
     android:descendantFocusability="blocksDescendants"
     android:orientation="horizontal"
-    android:paddingTop="20dp"
+    android:paddingBottom="10dp"
     android:paddingLeft="15dp"
-    android:paddingBottom="10dp">
+    android:paddingTop="20dp">
 
-    <ImageView android:id="@+id/favorite"
+    <ImageView
+        android:id="@+id/favorite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/star"
         android:background="#00ffffff"
         android:onClick="onToggleStar"
+        android:paddingBottom="15dp"
         android:paddingTop="2dp"
-        android:paddingBottom="15dp"/>
+        android:src="@drawable/star" />
 
     <com.theleafapps.pro.feathernotes.utils.MyCustomTextView
+        android:id="@+id/noteTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="TestNote"
-        android:id="@+id/noteTextView"
         android:layout_gravity="center_horizontal"
-        android:singleLine="true"
         android:ellipsize="middle"
-        android:textScaleX="1.0"
         android:paddingLeft="25dp"
-        android:textSize="18sp"
-        android:paddingTop="2dp" />
+        android:paddingTop="2dp"
+        android:singleLine="true"
+        android:text="TestNote"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textScaleX="1.0"
+        android:textSize="18sp" />
 
 </LinearLayout>
